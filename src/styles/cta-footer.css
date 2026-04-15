@@ -1,0 +1,82 @@
+/* CtaFooter — animated blob backgrounds */
+
+.cta-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  will-change: transform;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cta-blob-1 {
+  width: 520px;
+  height: 520px;
+  top: -160px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(43, 157, 238, 0.40) 0%, transparent 70%);
+  animation: blob-float-1 7s ease-in-out infinite alternate;
+}
+
+.cta-blob-2 {
+  width: 680px;
+  height: 680px;
+  top: -200px;
+  right: -200px;
+  background: radial-gradient(circle, rgba(26, 86, 255, 0.28) 0%, transparent 70%);
+  animation: blob-float-2 9s ease-in-out infinite alternate;
+}
+
+.cta-blob-3 {
+  width: 400px;
+  height: 400px;
+  bottom: -80px;
+  left: 30%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+  animation: blob-float-3 11s ease-in-out infinite alternate;
+}
+
+@keyframes blob-float-1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(60px, 40px) scale(1.08); }
+  66%  { transform: translate(-30px, 80px) scale(0.95); }
+  100% { transform: translate(40px, -20px) scale(1.05); }
+}
+
+@keyframes blob-float-2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(-80px, 60px) scale(0.92); }
+  66%  { transform: translate(40px, -40px) scale(1.10); }
+  100% { transform: translate(-50px, 30px) scale(0.98); }
+}
+
+@keyframes blob-float-3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(60px, -40px) scale(1.12); }
+  100% { transform: translate(-40px, 30px) scale(0.9); }
+}
+
+/* Animated light sweep on the right card */
+.cta-card-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    125deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.07) 40%,
+    rgba(255, 255, 255, 0.13) 42%,
+    rgba(255, 255, 255, 0.07) 44%,
+    transparent 49%,
+    transparent 100%
+  );
+  animation: sweep 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sweep {
+  0%   { transform: translateX(-120%) skewX(-15deg); }
+  50%  { transform: translateX(220%) skewX(-15deg); }
+  100% { transform: translateX(220%) skewX(-15deg); }
+}

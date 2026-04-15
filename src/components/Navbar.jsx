@@ -2,17 +2,18 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 
-const navItems = ["Início", "Como funciona", "Recursos", "Offline", "FAQ"];
+const navItems = ["Início", "Como funciona", "Benefícios", "Calculadora", "Contato"];
 const navLinks = {
   "Início": "#inicio",
   "Como funciona": "#como-funciona",
-  Recursos: "#recursos",
-  Offline: "#offline",
-  FAQ: "#faq",
+  "Benefícios": "#beneficios",
+  "Calculadora": "#calculadora",
+  "Contato": "#contato",
 };
 
 export function Navbar() {
   const [isOverHero, setIsOverHero] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -25,17 +26,18 @@ export function Navbar() {
     const update = () => {
       raf = 0;
       const rect = hero.getBoundingClientRect();
+      const y = window.scrollY;
+
+      setScrolled(y > 60);
 
       if (rect.bottom <= 0) {
         setIsOverHero(false);
         return;
       }
-
       if (rect.top >= 0) {
         setIsOverHero(true);
         return;
       }
-
       const progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
       setIsOverHero(progress < DARK_CUTOFF);
     };
@@ -57,9 +59,7 @@ export function Navbar() {
 
   useEffect(() => {
     if (!menuOpen) return undefined;
-    const onKeyDown = (e) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
+    const onKeyDown = (e) => { if (e.key === "Escape") setMenuOpen(false); };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [menuOpen]);
@@ -88,38 +88,50 @@ export function Navbar() {
         }`}
       />
 
-      <div className="relative px-4 py-4 sm:px-6 sm:py-5 lg:px-12">
+      <div
+        className={`relative px-4 sm:px-6 lg:px-12 transition-all duration-300 ease-out ${
+          scrolled ? "py-2 sm:py-2.5" : "py-4 sm:py-5"
+        }`}
+      >
         <div className="mx-auto grid w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center">
           <a href="#inicio" className="flex items-center gap-3">
-            <div className="relative h-10 w-10">
+            <div
+              className={`relative transition-all duration-300 ease-out ${
+                scrolled ? "h-8 w-8" : "h-10 w-10"
+              }`}
+            >
               <img
                 src="/brand/logo/meivo-mark-white.svg"
                 alt="Meivo"
-                className={`absolute inset-0 h-10 w-10 transition-opacity duration-300 ease-out ${
+                className={`absolute inset-0 h-full w-full transition-opacity duration-300 ease-out ${
                   isOverHero ? "opacity-100" : "opacity-0"
                 }`}
               />
               <img
                 src="/brand/logo/meivo-mark-blue.svg"
                 alt="Meivo"
-                className={`absolute inset-0 h-10 w-10 transition-opacity duration-300 ease-out ${
+                className={`absolute inset-0 h-full w-full transition-opacity duration-300 ease-out ${
                   isOverHero ? "opacity-0" : "opacity-100"
                 }`}
               />
             </div>
 
-            <div className="relative hidden h-7 md:block">
+            <div
+              className={`relative hidden md:block transition-all duration-300 ease-out ${
+                scrolled ? "h-6" : "h-7"
+              }`}
+            >
               <img
                 src="/brand/logo/meivo-wordmark-blue.png"
                 alt="Meivo"
-                className={`h-7 transition-opacity duration-300 ease-out ${
+                className={`h-full transition-opacity duration-300 ease-out ${
                   isOverHero ? "opacity-0" : "opacity-100"
                 }`}
               />
               <img
                 src="/brand/logo/meivo-wordmark-blue.png"
                 alt="Meivo"
-                className={`absolute inset-0 h-7 brightness-0 invert transition-opacity duration-300 ease-out ${
+                className={`absolute inset-0 h-full brightness-0 invert transition-opacity duration-300 ease-out ${
                   isOverHero ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -149,7 +161,7 @@ export function Navbar() {
               ))}
               <Button asChild variant="default" size="sm" className={demoButtonClassName}>
                 <a href="#contato" aria-label="Ir para contato">
-                  Pedir demo
+                  Começar agora
                   <ArrowUpRight data-icon="inline-end" />
                 </a>
               </Button>
@@ -159,7 +171,7 @@ export function Navbar() {
           <div className="flex items-center justify-end gap-2 md:hidden">
             <Button asChild variant="default" size="sm" className={demoButtonClassName}>
               <a href="#contato" aria-label="Ir para contato">
-                Demo
+                Começar
                 <ArrowUpRight data-icon="inline-end" />
               </a>
             </Button>
@@ -193,7 +205,7 @@ export function Navbar() {
         </button>
 
         <div
-          className={`fixed left-3 right-3 top-[76px] z-[60] origin-top rounded-3xl transition-all duration-200 ease-out ${
+          className={`fixed left-3 right-3 top-[68px] z-[60] origin-top rounded-3xl transition-all duration-200 ease-out ${
             menuOpen ? "translate-y-0 scale-100 opacity-100" : "-translate-y-2 scale-[0.98] opacity-0"
           } ${isOverHero ? "liquid-glass-strong bg-white/10" : "bg-white"}`}
         >
@@ -214,16 +226,10 @@ export function Navbar() {
                 </a>
               ))}
             </div>
-
             <div className="mt-2">
-              <Button
-                asChild
-                variant="default"
-                size="lg"
-                className={`w-full ${demoButtonClassName}`}
-              >
+              <Button asChild variant="default" size="lg" className={`w-full ${demoButtonClassName}`}>
                 <a href="#contato" onClick={() => setMenuOpen(false)} aria-label="Ir para contato">
-                  Pedir demonstração
+                  Começar agora
                   <ArrowUpRight data-icon="inline-end" />
                 </a>
               </Button>

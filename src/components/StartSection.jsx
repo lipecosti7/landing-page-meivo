@@ -1,19 +1,20 @@
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
 
 const steps = [
   {
-    title: "Instale como PWA",
-    description: "Abra no celular e instale. Mobile-first, do jeito certo para o balcão.",
+    number: "01",
+    title: "Registrar venda",
+    description: "Selecione os produtos, defina a quantidade e finalize a venda em poucos toques. Sem fricção, sem demora.",
   },
   {
-    title: "Cadastre produtos e estoque",
-    description: "Organize categorias, quantidades e histórico sem planilhas.",
+    number: "02",
+    title: "Gerar Pix",
+    description: "Gere um QR Code Pix na hora para o cliente pagar. Confirmação instantânea direto no painel.",
   },
   {
-    title: "Venda e sincronize",
-    description: "Funciona com internet instável e sincroniza quando a conexão voltar.",
+    number: "03",
+    title: "Ver relatórios",
+    description: "Acompanhe vendas, estoque e desempenho em tempo real. Tudo organizado, tudo na palma da mão.",
   },
 ];
 
@@ -30,24 +31,25 @@ export function StartSection() {
             Do cadastro à venda, sem atrito.
           </h2>
           <p className="mt-5 max-w-xl text-sm font-medium text-foreground/65 md:text-base">
-            O Meivo PDV foi feito para operações rápidas no dia a dia. Você configura uma
-            vez e vende com fluidez.
+            O Meivo PDV foi feito para operações rápidas no dia a dia. Você configura uma vez e vende com fluidez.
           </p>
 
-          <div className="mt-10 space-y-4">
-            {steps.map((step) => (
-              <div key={step.title} className="liquid-glass rounded-2xl p-5">
-                <div className="flex items-start gap-3">
-                  <div className="liquid-glass-strong mt-0.5 flex size-9 items-center justify-center rounded-full text-primary">
-                    <CheckCircle2 className="size-5" />
+          <div className="mt-10 space-y-3">
+            {steps.map((step, i) => (
+              <div
+                key={step.title}
+                className="group liquid-glass rounded-2xl p-5 transition-shadow duration-200 hover:shadow-md"
+                style={{ animationDelay: `${i * 120}ms` }}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#2B9DEE]/10 text-xs font-extrabold text-[#2B9DEE] transition-colors duration-200 group-hover:bg-[#2B9DEE] group-hover:text-white">
+                      {step.number}
+                    </div>
                   </div>
                   <div>
-                    <div className="text-base font-semibold text-foreground">
-                      {step.title}
-                    </div>
-                    <div className="mt-1 text-sm font-medium text-foreground/60">
-                      {step.description}
-                    </div>
+                    <div className="text-base font-semibold text-foreground">{step.title}</div>
+                    <div className="mt-1 text-sm font-medium text-foreground/60">{step.description}</div>
                   </div>
                 </div>
               </div>
@@ -55,12 +57,16 @@ export function StartSection() {
           </div>
 
           <div className="mt-10">
-            <Button asChild variant="default" size="lg">
-              <a href="#contato" aria-label="Ir para contato">
-                Pedir demonstração
-                <ArrowUpRight data-icon="inline-end" />
-              </a>
-            </Button>
+            <a
+              href="#contato"
+              aria-label="Ir para contato"
+              className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-[#2B9DEE] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 ease-out hover:bg-[#2B9DEE]/90 hover:shadow-[0_0_28px_rgba(43,157,238,0.45)]"
+            >
+              Começar agora
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-4">
+                <path fillRule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM6.75 9.25a.75.75 0 0 0 0 1.5h4.59l-2.1 1.95a.75.75 0 0 0 1.02 1.1l3.5-3.25a.75.75 0 0 0 0-1.1l-3.5-3.25a.75.75 0 1 0-1.02 1.1l2.1 1.95H6.75Z" clipRule="evenodd" />
+              </svg>
+            </a>
           </div>
         </div>
 
