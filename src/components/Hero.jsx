@@ -3,8 +3,8 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { Badge } from "./ui/badge";
 
 const FRAME_COUNT = 120;
-// 2 × 100vh: sticky viewport fills 1 screen, user scrolls 1 screen through the animation.
-const SCROLL_MULTIPLIER = 2;
+// 1.5 × 100vh: animation completes in ~50vh of scrolling, minimal dead space.
+const SCROLL_MULTIPLIER = 1.5;
 
 function getFrameSrc(index) {
   const num = String(index + 1).padStart(3, "0");
@@ -121,10 +121,10 @@ export function Hero() {
       ref={sectionRef}
       id="inicio"
       style={{ height: `${SCROLL_MULTIPLIER * 100}vh` }}
-      className="relative"
+      className="relative bg-[#060D1A]"
     >
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#060D1A]">
 
         {/* Canvas — scroll-driven frame sequence */}
         <canvas
