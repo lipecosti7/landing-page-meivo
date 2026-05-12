@@ -12,18 +12,16 @@ export default function App() {
   return (
     <ReactLenis root options={{ lerp: 0.08, duration: 1.2 }}>
       <div className="bg-background text-foreground">
-        <div className="relative z-10">
-          <Navbar />
-          <Hero />
-          <div className="bg-background">
-            <StartSection />
-            <BenefitsSection />
-            <TaxCalculator />
-            <Stats />
-            <CtaFooter />
-          </div>
-          <Footer />
-        </div>
+        <Navbar />
+        <Hero />
+        <main className="bg-background">
+          <StartSection />
+          <BenefitsSection />
+          <TaxCalculator />
+          <Stats />
+          <CtaFooter />
+        </main>
+        <Footer />
       </div>
     </ReactLenis>
   );
