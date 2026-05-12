@@ -3,8 +3,8 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { Badge } from "./ui/badge";
 
 const FRAME_COUNT = 120;
-// 3 × 100vh: sticky viewport fills 1 screen, user scrolls 2 screens through the animation.
-const SCROLL_MULTIPLIER = 3;
+// 2 × 100vh: sticky viewport fills 1 screen, user scrolls 1 screen through the animation.
+const SCROLL_MULTIPLIER = 2;
 
 function getFrameSrc(index) {
   const num = String(index + 1).padStart(3, "0");
